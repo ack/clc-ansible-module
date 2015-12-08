@@ -28,6 +28,29 @@ Validate that all packages are install and configured:
 ansible-playbook -i /usr/local/bin/clc_inv.py my-playbook.yml
 ```
 
+
+####Troubleshooting
+
+
+`ERROR: clc_server is not a legal parameter in an Ansible task or handler`
+
+Ansible requires explicitly including non-core modules via a library path. (see [docs](http://docs.ansible.com/ansible/intro_configuration.html#library) )
+
+```bash
+$ ansible --version
+ansible 1.9.1
+  configured module search path = None
+```
+
+Either: 
+
+- symlink this module alongside your playbooks at `./library/clc_ansible_module`
+- provide env var `ANSIBLE_LIBRARY=/path/to/installed/module`
+- configure library in ansible.cfg 
+
+
+
+
 ####Dependencies
 This module has one dependency  The [clc-python-sdk](https://github.com/CenturyLinkCloud/clc-python-sdk).  You can install it with pip
 
